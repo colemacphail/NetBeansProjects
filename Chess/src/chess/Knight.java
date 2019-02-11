@@ -6,6 +6,7 @@
 package chess;
 
 import DLibX.DConsole;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,6 +25,11 @@ public class Knight extends Piece{
         
         return (Math.abs(dx) == 2 && Math.abs(dy) == 1) || (Math.abs(dy) == 2 && Math.abs(dx) == 1);         
                 
+    }
+
+    @Override
+    public ArrayList<Tile> getPossibleMoves() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

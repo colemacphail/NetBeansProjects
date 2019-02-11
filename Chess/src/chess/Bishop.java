@@ -6,6 +6,7 @@
 package chess;
 
 import DLibX.DConsole;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,5 +24,10 @@ public class Bishop extends Piece {
         int dy = y - this.getY();
         
         return Math.abs(dx) == Math.abs(dy) && dx != 0;
+    }
+
+    @Override
+    public ArrayList<Tile> getPossibleMoves() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

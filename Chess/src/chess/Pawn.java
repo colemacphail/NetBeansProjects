@@ -6,6 +6,7 @@
 package chess;
 
 import DLibX.DConsole;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +20,11 @@ public class Pawn extends Piece{
     
     @Override
     public boolean canMove(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Tile> getPossibleMoves() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

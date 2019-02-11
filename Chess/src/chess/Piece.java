@@ -6,7 +6,7 @@
 package chess;
 
 import DLibX.DConsole;
-import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
@@ -64,6 +64,8 @@ public abstract class Piece {
         return this.isSelected;
     }
 
+    public abstract ArrayList<Tile> getPossibleMoves();
+    
     public abstract boolean canMove(int x, int y);
 
 }
