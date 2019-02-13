@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Cole
  */
-public class Rook extends Piece{
+public class Rook extends Piece {
 
     public Rook(DConsole dc, int initX, int initY, Colour c, Board b, String s) {
         super(dc, initX, initY, c, b, s);
@@ -22,10 +22,4 @@ public class Rook extends Piece{
     public boolean canMove(int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public ArrayList<Tile> getPossibleMoves() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
- 
 }

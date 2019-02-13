@@ -25,9 +25,4 @@ public class Bishop extends Piece {
         
         return Math.abs(dx) == Math.abs(dy) && dx != 0;
     }
-
-    @Override
-    public ArrayList<Tile> getPossibleMoves() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

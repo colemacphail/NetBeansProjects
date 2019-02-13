@@ -12,10 +12,8 @@ import java.util.ArrayList;
  *
  * @author Cole
  */
-public class King extends Piece{
-    
-    
-    
+public class King extends Piece {
+
     public King(DConsole dc, int x, int y, Colour c, Board b, String s) {
         super(dc, x, y, c, b, s);
     }
@@ -24,10 +22,4 @@ public class King extends Piece{
     public boolean canMove(int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public ArrayList<Tile> getPossibleMoves() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

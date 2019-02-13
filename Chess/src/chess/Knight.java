@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Cole
  */
-public class Knight extends Piece{
+public class Knight extends Piece {
 
     public Knight(DConsole dc, int initX, int initY, Colour c, Board b, String s) {
         super(dc, initX, initY, c, b, s);
@@ -22,14 +22,8 @@ public class Knight extends Piece{
     public boolean canMove(int x, int y) {
         int dx = x - this.getX();
         int dy = y - this.getY();
-        
-        return (Math.abs(dx) == 2 && Math.abs(dy) == 1) || (Math.abs(dy) == 2 && Math.abs(dx) == 1);         
-                
-    }
 
-    @Override
-    public ArrayList<Tile> getPossibleMoves() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Math.abs(dx) == 2 && Math.abs(dy) == 1) || (Math.abs(dy) == 2 && Math.abs(dx) == 1);
+
     }
-    
 }

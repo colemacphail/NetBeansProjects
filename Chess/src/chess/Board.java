@@ -13,14 +13,14 @@ import java.util.ArrayList;
  *
  * @author Cole
  */
-public class Board {
+public class Board implements Drawable {
 
     private final DConsole dc;
-    private final Tile tiles[][] = new Tile[8][8];
+    private final Tile tiles[][] = new Tile[Constants.BOARD_WIDTH][Constants.BOARD_HEIGHT];
     private int mouseX;
     private int mouseY;
 
-    private ArrayList<Piece> pieces = new ArrayList<>();
+    private final ArrayList<Piece> pieces = new ArrayList<>();
 
     private Colour whoseTurn = Colour.WHITE;
 
@@ -61,6 +61,7 @@ public class Board {
         }
     }
 
+    @Override
     public void draw() {//draw everything
         this.dc.setOrigin(DConsole.ORIGIN_TOP_LEFT);
 
@@ -106,6 +107,7 @@ public class Board {
                             }
                         }
                     }
+
                     if (isPieceSelected()
                             && !clickedPiece) {//once per cycle
                         if ((i != this.selectedPiece().getX()
@@ -130,12 +132,21 @@ public class Board {
             }
         }
 
+        if (isPieceSelected()) {
+            for (int i = 0; i < this.tiles.length; i++) {
+                for (int j = 0; j < this.tiles[0].length; j++) {
+                    this.tiles[i][j].setHighlighted(this.selectedPiece().getPossibleMoves(this.pieces)[i][j]);
+                }
+            }
+        }
+
     }
 
     private void deselectAllTiles() {
         for (int k = 0; k < this.tiles.length; k++) {
             for (int m = 0; m < this.tiles[0].length; m++) {
                 this.tiles[k][m].setSelected(false);
+                this.tiles[k][m].setHighlighted(false);
             }
         }
     }
