@@ -82,6 +82,16 @@ public class Board implements Drawable {
 
         for (int i = 0; i < this.tiles.length; i++) {
             for (int j = 0; j < this.tiles[0].length; j++) {
+                boolean isOccupied = false;
+                for (int k = 0; k < pieces.size(); k++) {
+                    if (this.pieces.get(k).getX() == i
+                            && this.pieces.get(k).getY() == j) {
+                        isOccupied = true;
+                    }
+                }
+                
+                this.tiles[i][j].setOccupied(isOccupied);
+
                 if (this.mouseX > this.tiles[i][j].getX()
                         && this.mouseX < this.tiles[i][j].getX() + this.tiles[i][j].getSize()
                         && this.mouseY > this.tiles[i][j].getY()
@@ -93,7 +103,7 @@ public class Board implements Drawable {
                     boolean hasPieceMoved = false;
 
                     this.tiles[i][j].setSelected(true);//select the tile clicked
-
+                    System.out.println("x: " + i + ", y: " + j);
                     boolean clickedPiece = false;
 
                     for (int k = 0; k < this.pieces.size(); k++) {
@@ -175,5 +185,9 @@ public class Board implements Drawable {
             }
         }
         return p;
+    }
+
+    public ArrayList<Piece> getPieceList() {
+        return this.pieces;
     }
 }

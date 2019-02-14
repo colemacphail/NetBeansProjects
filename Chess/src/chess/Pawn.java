@@ -20,7 +20,30 @@ public class Pawn extends Piece {
 
     @Override
     public boolean canMove(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int dx = x - this.getX();
+        int dy = y - this.getY();
+
+        if (dx == 0) {
+            if (this.colour == Colour.WHITE) {
+                if (this.hasMoved) {
+                    return dy == -1;
+                } else {
+                    return dy == -1 || dy == -2;
+                }
+            } else {
+                if (this.hasMoved) {
+                    return dy == 1;
+                } else {
+                    return dy == 1 || dy == 2;
+                }
+            }
+        } else {
+            return false;
+        }
     }
 
+    @Override
+    public boolean[][] getPossibleMoves(ArrayList<Piece> pieces) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

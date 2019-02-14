@@ -21,6 +21,7 @@ public class Tile implements Drawable {
     private final int size = Constants.TILE_SIZE;
     private boolean isSelected = false;
     private boolean isHighlighted = false;
+    private boolean isOccupied = false;
 
     public Tile(DConsole dc, int x, int y, Color colour) {
         this.dc = dc;
@@ -54,8 +55,12 @@ public class Tile implements Drawable {
     public int getSize() {
         return this.size;
     }
-    
-    public void setHighlighted(boolean isHighlighted){
+
+    public void setHighlighted(boolean isHighlighted) {
         this.isHighlighted = isHighlighted;
+    }
+
+    public void setOccupied(boolean isOccupied) {
+        this.isOccupied = isOccupied;
     }
 }

@@ -20,6 +20,15 @@ public class King extends Piece {
 
     @Override
     public boolean canMove(int x, int y) {
+        int dx = x - this.getX();
+        int dy = y - this.getY();
+        
+        return Math.abs(dy) <= 1 && Math.abs(dx) <= 1;
+        
+    }
+
+    @Override
+    public boolean[][] getPossibleMoves(ArrayList<Piece> pieces) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

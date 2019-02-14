@@ -17,15 +17,20 @@ public abstract class Piece implements Drawable {
     protected final DConsole dc;
     protected int x;
     protected int y;
+    protected int initX;
+    protected int initY;
     protected final Colour colour;
     protected String sprite;
     protected Board board;
     protected boolean isSelected = false;
+    protected boolean hasMoved = false;
 
     public Piece(DConsole dc, int initX, int initY, Colour c, Board b, String sprite) {
         this.dc = dc;
         this.x = initX;
+        this.initX = initX;
         this.y = initY;
+        this.initY = initY;
         this.colour = c;
         this.board = b;
         this.sprite = sprite;
@@ -34,6 +39,7 @@ public abstract class Piece implements Drawable {
     public void move(int x, int y) {
         this.x = x;
         this.y = y;
+        this.hasMoved = true;
     }
 
     @Override
@@ -69,33 +75,7 @@ public abstract class Piece implements Drawable {
         return p.getColour() == this.colour;
     }
 
-    public boolean[][] getPossibleMoves(ArrayList<Piece> pieces) {
-                boolean[][] canMoveTiles = new boolean[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
-
-        for (int i = 0; i < pieces.size(); i++) {
-            for (int j = 0; j < canMoveTiles.length; j++) {
-                for (int k = 0; k < canMoveTiles[0].length; k++) {
-                    if (this.canMove(j, k)) { // if the piece can move to the tile, try to do so
-                        if (pieces.get(i).getX() != j // if there is no piece on that tile, that tile is available
-                                && pieces.get(i).getY() != k) {
-                            canMoveTiles[j][k] = true;
-                        } else { // Otherwise, if the piece occupying that tile is the other colour, that tile is available
-
-                            if (this.getIsSameColour(pieces.get(i))) {
-                                canMoveTiles[j][k] = false;
-                            } else {
-                                canMoveTiles[j][k] = true;
-                            }
-                        }
-                    } else {
-                        canMoveTiles[j][k] = false;
-                    }
-                }
-            }
-        }
-
-        return canMoveTiles;
-    }
+    public abstract boolean[][] getPossibleMoves(ArrayList<Piece> pieces);
 
     public abstract boolean canMove(int x, int y);
 
