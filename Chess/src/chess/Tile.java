@@ -63,4 +63,8 @@ public class Tile implements Drawable {
     public void setOccupied(boolean isOccupied) {
         this.isOccupied = isOccupied;
     }
+    
+    public boolean getIsOccupied(){
+        return this.isOccupied;
+    }
 }

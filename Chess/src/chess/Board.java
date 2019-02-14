@@ -89,7 +89,7 @@ public class Board implements Drawable {
                         isOccupied = true;
                     }
                 }
-                
+
                 this.tiles[i][j].setOccupied(isOccupied);
 
                 if (this.mouseX > this.tiles[i][j].getX()
@@ -189,5 +189,9 @@ public class Board implements Drawable {
 
     public ArrayList<Piece> getPieceList() {
         return this.pieces;
+    }
+
+    public Tile[][] getTileSet() {
+        return this.tiles;
     }
 }

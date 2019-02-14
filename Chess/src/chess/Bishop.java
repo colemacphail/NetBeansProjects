@@ -20,10 +20,10 @@ public class Bishop extends Piece {
 
     @Override
     public boolean canMove(int x, int y) {
-        int dx = x - this.getX();
-        int dy = y - this.getY();
+        int dx = x - this.x;
+        int dy = y - this.y;
 
-        return Math.abs(dx) == Math.abs(dy) && dx != 0;
+        return Math.abs(dx) == Math.abs(dy);
     }
 
     @Override
@@ -50,6 +50,40 @@ public class Bishop extends Piece {
             }
         }
 
+        for (int j = 0; j < canMoveTiles.length; j++) {
+            for (int k = 0; k < canMoveTiles[0].length; k++) {
+
+                if (canMoveTiles[j][k]) {
+
+                    int dx = j - this.x;
+                    int dy = k - this.y;
+
+                    if (dx > 0 && dy > 0) {
+                        boolean isPrevTileOccupied = this.board.getTileSet()[this.x + dx - 1][this.y + dy - 1].getIsOccupied();
+                        if (isPrevTileOccupied || !canMoveTiles[j - 1][k - 1]) {
+                            canMoveTiles[j][k] = false;
+                        }
+                    } else if (dx < 0 && dy > 0) {
+                        boolean isPrevTileOccupied = this.board.getTileSet()[this.x + dx + 1][this.y + dy - 1].getIsOccupied();
+                        if (isPrevTileOccupied || !canMoveTiles[j + 1][k - 1]) {
+                            canMoveTiles[j][k] = false;
+                        }
+                    } else if (dx > 0 && dy < 0) {
+                        boolean isPrevTileOccupied = this.board.getTileSet()[this.x + dx - 1][this.y + dy + 1].getIsOccupied();
+                        if (isPrevTileOccupied || !canMoveTiles[j - 1][k + 1]) {
+                            canMoveTiles[j][k] = false;
+                        }
+                    } else if (dx < 0 && dy < 0) {
+                        boolean isPrevTileOccupied = this.board.getTileSet()[this.x + dx + 1][this.y + dy + 1].getIsOccupied();
+                        if (isPrevTileOccupied || !canMoveTiles[j + 1][k + 1]) {
+                            canMoveTiles[j][k] = false;
+                        }
+                    }
+
+                }
+
+            }
+        }
         return canMoveTiles;
 
     }
