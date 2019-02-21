@@ -50,41 +50,59 @@ public class Bishop extends Piece {
             }
         }
 
-        for (int j = 0; j < canMoveTiles.length; j++) {
-            for (int k = 0; k < canMoveTiles[0].length; k++) {
+        for (int j = this.x; j < this.board.getTileSet().length; j++) {//right
+            for (int k = this.y; k < this.board.getTileSet()[0].length; k++) {//down
 
                 if (canMoveTiles[j][k]) {
 
-                    int dx = j - this.x;
-                    int dy = k - this.y;
+                    boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k - 1].getIsOccupied();
+                    if (isPrevTileOccupied || !canMoveTiles[j - 1][k - 1]) {
+                        canMoveTiles[j][k] = false;
 
-                    if (dx > 0 && dy > 0) {
-                        boolean isPrevTileOccupied = this.board.getTileSet()[this.x + dx - 1][this.y + dy - 1].getIsOccupied();
-                        if (isPrevTileOccupied || !canMoveTiles[j - 1][k - 1]) {
-                            canMoveTiles[j][k] = false;
-                        }
-                    } else if (dx < 0 && dy > 0) {
-                        boolean isPrevTileOccupied = this.board.getTileSet()[this.x + dx + 1][this.y + dy - 1].getIsOccupied();
-                        if (isPrevTileOccupied || !canMoveTiles[j + 1][k - 1]) {
-                            canMoveTiles[j][k] = false;
-                        }
-                    } else if (dx > 0 && dy < 0) {
-                        boolean isPrevTileOccupied = this.board.getTileSet()[this.x + dx - 1][this.y + dy + 1].getIsOccupied();
-                        if (isPrevTileOccupied || !canMoveTiles[j - 1][k + 1]) {
-                            canMoveTiles[j][k] = false;
-                        }
-                    } else if (dx < 0 && dy < 0) {
-                        boolean isPrevTileOccupied = this.board.getTileSet()[this.x + dx + 1][this.y + dy + 1].getIsOccupied();
-                        if (isPrevTileOccupied || !canMoveTiles[j + 1][k + 1]) {
-                            canMoveTiles[j][k] = false;
-                        }
                     }
-
                 }
-
             }
         }
-        return canMoveTiles;
+        for (int j = this.x; j < this.board.getTileSet().length; j++) {//right
+            for (int k = this.y; k > -1; k--) {//up
 
+                if (canMoveTiles[j][k]) {
+
+                    boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k + 1].getIsOccupied();
+                    if (isPrevTileOccupied || !canMoveTiles[j - 1][k + 1]) {
+                        canMoveTiles[j][k] = false;
+
+                    }
+                }
+            }
+        }
+        for (int j = this.x; j > -1; j--) {//left
+            for (int k = this.y; k < this.board.getTileSet()[0].length; k++) {//down
+
+                if (canMoveTiles[j][k]) {
+
+                    boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k - 1].getIsOccupied();
+                    if (isPrevTileOccupied || !canMoveTiles[j + 1][k - 1]) {
+                        canMoveTiles[j][k] = false;
+
+                    }
+                }
+            }
+        }
+        for (int j = this.x; j > -1; j--) {//left
+            for (int k = this.y; k > -1; k--) {//up
+
+                if (canMoveTiles[j][k]) {
+
+                    boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k + 1].getIsOccupied();
+                    if (isPrevTileOccupied || !canMoveTiles[j + 1][k + 1]) {
+                        canMoveTiles[j][k] = false;
+
+                    }
+                }
+            }
+        }
+
+        return canMoveTiles;
     }
 }
