@@ -24,7 +24,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public boolean[][] getPossibleMoves(ArrayList<Piece> pieces) {
+    public boolean[][] getPossibleMoves() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

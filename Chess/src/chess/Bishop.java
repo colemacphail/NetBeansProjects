@@ -27,7 +27,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public boolean[][] getPossibleMoves(ArrayList<Piece> pieces) {
+    public boolean[][] getPossibleMoves() {
 
         boolean[][] canMoveTiles = new boolean[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
 
@@ -38,10 +38,10 @@ public class Bishop extends Piece {
                 if (!this.canMove(j, k)) { // if the piece cannot move to a tile, it is not valid
                     isValid = false;
                 }
-                for (int i = 0; i < pieces.size(); i++) { // if a tile is occupied, it is not valid
-                    if (pieces.get(i).getX() == j
-                            && pieces.get(i).getY() == k
-                            && getIsSameColour(pieces.get(i))) {
+                for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
+                    if (Board.PIECES.get(i).getX() == j
+                            && Board.PIECES.get(i).getY() == k
+                            && getIsSameColour(Board.PIECES.get(i))) {
                         isValid = false;
                     }
                 }
@@ -57,8 +57,9 @@ public class Bishop extends Piece {
 
                     boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k - 1].getIsOccupied();
                     if (isPrevTileOccupied || !canMoveTiles[j - 1][k - 1]) {
-                        canMoveTiles[j][k] = false;
-
+                        if (this.x != j - 1 && this.y != k - 1) {
+                            canMoveTiles[j][k] = false;
+                        }
                     }
                 }
             }
@@ -70,8 +71,9 @@ public class Bishop extends Piece {
 
                     boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k + 1].getIsOccupied();
                     if (isPrevTileOccupied || !canMoveTiles[j - 1][k + 1]) {
-                        canMoveTiles[j][k] = false;
-
+                        if (this.x != j - 1 && this.y != k + 1) {
+                            canMoveTiles[j][k] = false;
+                        }
                     }
                 }
             }
@@ -83,8 +85,9 @@ public class Bishop extends Piece {
 
                     boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k - 1].getIsOccupied();
                     if (isPrevTileOccupied || !canMoveTiles[j + 1][k - 1]) {
-                        canMoveTiles[j][k] = false;
-
+                        if (this.x != j + 1 && this.y != k - 1) {
+                            canMoveTiles[j][k] = false;
+                        }
                     }
                 }
             }
@@ -96,8 +99,9 @@ public class Bishop extends Piece {
 
                     boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k + 1].getIsOccupied();
                     if (isPrevTileOccupied || !canMoveTiles[j + 1][k + 1]) {
-                        canMoveTiles[j][k] = false;
-
+                        if (this.x != j + 1 && this.y != k + 1) {
+                            canMoveTiles[j][k] = false;
+                        }
                     }
                 }
             }

@@ -75,7 +75,7 @@ public abstract class Piece implements Drawable {
         return p.getColour() == this.colour;
     }
 
-    public abstract boolean[][] getPossibleMoves(ArrayList<Piece> pieces);
+    public abstract boolean[][] getPossibleMoves();
 
     public abstract boolean canMove(int x, int y);
 

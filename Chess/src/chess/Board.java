@@ -20,7 +20,7 @@ public class Board implements Drawable {
     private int mouseX;
     private int mouseY;
 
-    private final ArrayList<Piece> pieces = new ArrayList<>();
+    public static final ArrayList<Piece> PIECES = new ArrayList<>();
 
     private Colour whoseTurn = Colour.WHITE;
 
@@ -37,27 +37,27 @@ public class Board implements Drawable {
             }
         }
         //create all the pieces
-        this.pieces.add(new Rook(this.dc, 0, 7, Colour.WHITE, this, "White Rook.png"));
-        this.pieces.add(new Knight(this.dc, 1, 7, Colour.WHITE, this, "White Knight.png"));
-        this.pieces.add(new Bishop(this.dc, 2, 7, Colour.WHITE, this, "White Bishop.png"));
-        this.pieces.add(new Queen(this.dc, 3, 7, Colour.WHITE, this, "White Queen.png"));
-        this.pieces.add(new King(this.dc, 4, 7, Colour.WHITE, this, "White King.png"));
-        this.pieces.add(new Bishop(this.dc, 5, 7, Colour.WHITE, this, "White Bishop.png"));
-        this.pieces.add(new Knight(this.dc, 6, 7, Colour.WHITE, this, "White Knight.png"));
-        this.pieces.add(new Rook(this.dc, 7, 7, Colour.WHITE, this, "White Rook.png"));
+        this.PIECES.add(new Rook(this.dc, 0, 7, Colour.WHITE, this, "White Rook.png"));
+        this.PIECES.add(new Knight(this.dc, 1, 7, Colour.WHITE, this, "White Knight.png"));
+        this.PIECES.add(new Bishop(this.dc, 2, 7, Colour.WHITE, this, "White Bishop.png"));
+        this.PIECES.add(new Queen(this.dc, 3, 7, Colour.WHITE, this, "White Queen.png"));
+        this.PIECES.add(new King(this.dc, 4, 7, Colour.WHITE, this, "White King.png"));
+        this.PIECES.add(new Bishop(this.dc, 5, 7, Colour.WHITE, this, "White Bishop.png"));
+        this.PIECES.add(new Knight(this.dc, 6, 7, Colour.WHITE, this, "White Knight.png"));
+        this.PIECES.add(new Rook(this.dc, 7, 7, Colour.WHITE, this, "White Rook.png"));
 
-        this.pieces.add(new Rook(this.dc, 0, 0, Colour.BLACK, this, "Black Rook.png"));
-        this.pieces.add(new Knight(this.dc, 1, 0, Colour.BLACK, this, "Black Knight.png"));
-        this.pieces.add(new Bishop(this.dc, 2, 0, Colour.BLACK, this, "Black Bishop.png"));
-        this.pieces.add(new Queen(this.dc, 3, 0, Colour.BLACK, this, "Black Queen.png"));
-        this.pieces.add(new King(this.dc, 4, 0, Colour.BLACK, this, "Black King.png"));
-        this.pieces.add(new Bishop(this.dc, 5, 0, Colour.BLACK, this, "Black Bishop.png"));
-        this.pieces.add(new Knight(this.dc, 6, 0, Colour.BLACK, this, "Black Knight.png"));
-        this.pieces.add(new Rook(this.dc, 7, 0, Colour.BLACK, this, "Black Rook.png"));
+        this.PIECES.add(new Rook(this.dc, 0, 0, Colour.BLACK, this, "Black Rook.png"));
+        this.PIECES.add(new Knight(this.dc, 1, 0, Colour.BLACK, this, "Black Knight.png"));
+        this.PIECES.add(new Bishop(this.dc, 2, 0, Colour.BLACK, this, "Black Bishop.png"));
+        this.PIECES.add(new Queen(this.dc, 3, 0, Colour.BLACK, this, "Black Queen.png"));
+        this.PIECES.add(new King(this.dc, 4, 0, Colour.BLACK, this, "Black King.png"));
+        this.PIECES.add(new Bishop(this.dc, 5, 0, Colour.BLACK, this, "Black Bishop.png"));
+        this.PIECES.add(new Knight(this.dc, 6, 0, Colour.BLACK, this, "Black Knight.png"));
+        this.PIECES.add(new Rook(this.dc, 7, 0, Colour.BLACK, this, "Black Rook.png"));
 
         for (int i = 0; i < 8; i++) {
-            this.pieces.add(new Pawn(this.dc, i, 6, Colour.WHITE, this, "White Pawn.png"));
-            this.pieces.add(new Pawn(this.dc, i, 1, Colour.BLACK, this, "Black Pawn.png"));
+            this.PIECES.add(new Pawn(this.dc, i, 6, Colour.WHITE, this, "White Pawn.png"));
+            this.PIECES.add(new Pawn(this.dc, i, 1, Colour.BLACK, this, "Black Pawn.png"));
         }
     }
 
@@ -71,8 +71,8 @@ public class Board implements Drawable {
             }
         }
 
-        for (int i = 0; i < pieces.size(); i++) {
-            this.pieces.get(i).draw();
+        for (int i = 0; i < PIECES.size(); i++) {
+            this.PIECES.get(i).draw();
         }
     }
 
@@ -83,9 +83,9 @@ public class Board implements Drawable {
         for (int i = 0; i < this.tiles.length; i++) {
             for (int j = 0; j < this.tiles[0].length; j++) {
                 boolean isOccupied = false;
-                for (int k = 0; k < pieces.size(); k++) {
-                    if (this.pieces.get(k).getX() == i
-                            && this.pieces.get(k).getY() == j) {
+                for (int k = 0; k < PIECES.size(); k++) {
+                    if (this.PIECES.get(k).getX() == i
+                            && this.PIECES.get(k).getY() == j) {
                         isOccupied = true;
                     }
                 }
@@ -106,13 +106,13 @@ public class Board implements Drawable {
                     System.out.println("x: " + i + ", y: " + j);
                     boolean clickedPiece = false;
 
-                    for (int k = 0; k < this.pieces.size(); k++) {
-                        if (this.pieces.get(k).getX() == i
-                                && this.pieces.get(k).getY() == j) {//if you click on a piece 
+                    for (int k = 0; k < this.PIECES.size(); k++) {
+                        if (this.PIECES.get(k).getX() == i
+                                && this.PIECES.get(k).getY() == j) {//if you click on a piece 
 
-                            if (this.pieces.get(k).getColour() == whoseTurn) {//if it's yours
+                            if (this.PIECES.get(k).getColour() == whoseTurn) {//if it's yours
                                 this.deselectAllPieces();//deselect all pieces 
-                                this.pieces.get(k).setSelected(true);//select the clicked piece
+                                this.PIECES.get(k).setSelected(true);//select the clicked piece
                                 clickedPiece = true;
                             }
                         }
@@ -145,7 +145,7 @@ public class Board implements Drawable {
         if (isPieceSelected()) {
             for (int i = 0; i < this.tiles.length; i++) {
                 for (int j = 0; j < this.tiles[0].length; j++) {
-                    this.tiles[i][j].setHighlighted(this.selectedPiece().getPossibleMoves(this.pieces)[i][j]);
+                    this.tiles[i][j].setHighlighted(this.selectedPiece().getPossibleMoves()[i][j]);
                 }
             }
         }
@@ -162,15 +162,15 @@ public class Board implements Drawable {
     }
 
     private void deselectAllPieces() {
-        for (int k = 0; k < this.pieces.size(); k++) {
-            this.pieces.get(k).setSelected(false);
+        for (int k = 0; k < this.PIECES.size(); k++) {
+            this.PIECES.get(k).setSelected(false);
         }
     }
 
     private boolean isPieceSelected() {
         boolean isSelected = false;
-        for (int k = 0; k < this.pieces.size(); k++) {
-            if (this.pieces.get(k).getIsSelected()) {
+        for (int k = 0; k < this.PIECES.size(); k++) {
+            if (this.PIECES.get(k).getIsSelected()) {
                 isSelected = true;
             }
         }
@@ -179,16 +179,16 @@ public class Board implements Drawable {
 
     private Piece selectedPiece() {
         Piece p = null;
-        for (int k = 0; k < this.pieces.size(); k++) {
-            if (this.pieces.get(k).getIsSelected()) {
-                p = this.pieces.get(k);
+        for (int k = 0; k < this.PIECES.size(); k++) {
+            if (this.PIECES.get(k).getIsSelected()) {
+                p = this.PIECES.get(k);
             }
         }
         return p;
     }
 
     public ArrayList<Piece> getPieceList() {
-        return this.pieces;
+        return this.PIECES;
     }
 
     public Tile[][] getTileSet() {

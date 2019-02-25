@@ -37,13 +37,59 @@ public class Pawn extends Piece {
                     return dy == 1 || dy == 2;
                 }
             }
+        } else if (Math.abs(dx) == 1) {
+
+            if (this.colour == Colour.WHITE) {
+                if (dy == -1) {
+                    for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
+                        if (Board.PIECES.get(i).getX() == x
+                                && Board.PIECES.get(i).getY() == y
+                                && !this.getIsSameColour(Board.PIECES.get(i))) {
+                            return true;
+                        }
+                    }
+                }
+            } else {
+                if (dy == 1) {
+                    for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
+                        if (Board.PIECES.get(i).getX() == x
+                                && Board.PIECES.get(i).getY() == y
+                                && !this.getIsSameColour(Board.PIECES.get(i))) {
+                            return true;
+                        }
+                    }
+                }
+            }
+
         } else {
             return false;
         }
+        return false;
     }
 
     @Override
-    public boolean[][] getPossibleMoves(ArrayList<Piece> pieces) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean[][] getPossibleMoves() {
+        boolean[][] canMoveTiles = new boolean[Constants.BOARD_HEIGHT][Constants.BOARD_WIDTH];
+
+        for (int j = 0; j < canMoveTiles.length; j++) {
+            for (int k = 0; k < canMoveTiles[0].length; k++) {
+                boolean isValid = true;
+
+                if (!this.canMove(j, k)) { // if the piece cannot move to a tile, it is not valid
+                    isValid = false;
+                }
+                for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
+                    if (Board.PIECES.get(i).getX() == j
+                            && Board.PIECES.get(i).getY() == k) {
+                        isValid = false;
+                    }
+                }
+
+                canMoveTiles[j][k] = isValid;
+            }
+        }
+
+        return canMoveTiles;
+
     }
 }
