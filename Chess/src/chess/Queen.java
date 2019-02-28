@@ -48,7 +48,7 @@ public class Queen extends Piece {
                 canMoveTiles[j][k] = isValid;
             }
         }
-        
+
         for (int k = this.x; k < this.board.getTileSet().length; k++) {//right
 
             if (canMoveTiles[k][this.y]) {
@@ -61,7 +61,7 @@ public class Queen extends Piece {
                 }
             }
         }
-        
+
         for (int k = this.x; k > -1; k--) {//left
 
             if (canMoveTiles[k][this.y]) {
@@ -74,7 +74,7 @@ public class Queen extends Piece {
                 }
             }
         }
-        
+
         for (int k = this.y; k < this.board.getTileSet()[0].length; k++) {//down
 
             if (canMoveTiles[this.x][k]) {
@@ -87,7 +87,7 @@ public class Queen extends Piece {
                 }
             }
         }
-        
+
         for (int k = this.y; k > -1; k--) {//down
 
             if (canMoveTiles[this.x][k]) {
@@ -100,63 +100,71 @@ public class Queen extends Piece {
                 }
             }
         }
-        
-        for (int j = this.x; j < this.board.getTileSet().length; j++) {//right
-            for (int k = this.y; k < this.board.getTileSet()[0].length; k++) {//down
+        try {
+            for (int j = this.x; j < this.board.getTileSet().length; j++) {//right
+                for (int k = this.y; k < this.board.getTileSet()[0].length; k++) {//down
+                    int dx = j - this.x;
+                    int dy = k - this.y;
+                    if (Math.abs(dx) == Math.abs(dy)) {
 
-                if (canMoveTiles[j][k]) {
-
-                    boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k - 1].getIsOccupied();
-                    if (isPrevTileOccupied || !canMoveTiles[j - 1][k - 1]) {
-                        if (this.x != j - 1 && this.y != k - 1) {
-                            canMoveTiles[j][k] = false;
+                        boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k - 1].getIsOccupied();
+                        if (isPrevTileOccupied || !canMoveTiles[j - 1][k - 1]) {
+                            if (this.x != j - 1 && this.y != k - 1) {
+                                canMoveTiles[j][k] = false;
+                            }
                         }
                     }
                 }
             }
-        }
-        for (int j = this.x; j < this.board.getTileSet().length; j++) {//right
-            for (int k = this.y; k > -1; k--) {//up
+            for (int j = this.x; j < this.board.getTileSet().length; j++) {//right
+                for (int k = this.y; k > -1; k--) {//up
+                    int dx = j - this.x;
+                    int dy = k - this.y;
+                    if (Math.abs(dx) == Math.abs(dy)) {
 
-                if (canMoveTiles[j][k]) {
-
-                    boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k + 1].getIsOccupied();
-                    if (isPrevTileOccupied || !canMoveTiles[j - 1][k + 1]) {
-                        if (this.x != j - 1 && this.y != k + 1) {
-                            canMoveTiles[j][k] = false;
+                        boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k + 1].getIsOccupied();
+                        if (isPrevTileOccupied || !canMoveTiles[j - 1][k + 1]) {
+                            if (this.x != j - 1 && this.y != k + 1) {
+                                canMoveTiles[j][k] = false;
+                            }
                         }
                     }
                 }
             }
-        }
-        for (int j = this.x; j > -1; j--) {//left
-            for (int k = this.y; k < this.board.getTileSet()[0].length; k++) {//down
+            for (int j = this.x; j > -1; j--) {//left
+                for (int k = this.y; k < this.board.getTileSet()[0].length; k++) {//down
+                    int dx = j - this.x;
+                    int dy = k - this.y;
+                    if (Math.abs(dx) == Math.abs(dy)) {
 
-                if (canMoveTiles[j][k]) {
-
-                    boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k - 1].getIsOccupied();
-                    if (isPrevTileOccupied || !canMoveTiles[j + 1][k - 1]) {
-                        if (this.x != j + 1 && this.y != k - 1) {
-                            canMoveTiles[j][k] = false;
+                        boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k - 1].getIsOccupied();
+                        if (isPrevTileOccupied || !canMoveTiles[j + 1][k - 1]) {
+                            if (this.x != j + 1 && this.y != k - 1) {
+                                canMoveTiles[j][k] = false;
+                            }
                         }
                     }
                 }
             }
-        }
-        for (int j = this.x; j > -1; j--) {//left
-            for (int k = this.y; k > -1; k--) {//up
+            for (int j = this.x; j > -1; j--) {//left
+                for (int k = this.y; k > -1; k--) {//up
+                    int dx = j - this.x;
+                    int dy = k - this.y;
+                    if (Math.abs(dx) == Math.abs(dy)) {
 
-                if (canMoveTiles[j][k]) {
-
-                    boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k + 1].getIsOccupied();
-                    if (isPrevTileOccupied || !canMoveTiles[j + 1][k + 1]) {
-                        if (this.x != j + 1 && this.y != k + 1) {
-                            canMoveTiles[j][k] = false;
+                        boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k + 1].getIsOccupied();
+                        if (isPrevTileOccupied || !canMoveTiles[j + 1][k + 1]) {
+                            if (this.x != j + 1 && this.y != k + 1) {
+                                canMoveTiles[j][k] = false;
+                            }
                         }
                     }
                 }
             }
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("woopsies: " + e);
         }
+
         return canMoveTiles;
     }
 }
