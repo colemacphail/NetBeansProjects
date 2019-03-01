@@ -26,22 +26,24 @@ public class Pawn extends Piece {
         if (dx == 0) {
             if (this.colour == Colour.WHITE) {
                 if (this.hasMoved) {
-                    return dy == -1;
+                    return dy == -1 && !this.board.getTileSet()[x][y].getIsOccupied();
                 } else {
-                    return dy == -1 || dy == -2;
+                    return (dy == -1 && !this.board.getTileSet()[x][y].getIsOccupied())
+                            || (dy == -2 && (!this.board.getTileSet()[x][y + 1].getIsOccupied() && !this.board.getTileSet()[x][y].getIsOccupied()));
                 }
             } else {
                 if (this.hasMoved) {
-                    return dy == 1;
+                    return dy == 1 && !this.board.getTileSet()[x][y].getIsOccupied();
                 } else {
-                    return dy == 1 || dy == 2;
+                    return (dy == 1 && !this.board.getTileSet()[x][y].getIsOccupied())
+                            || (dy == 2 && (!this.board.getTileSet()[x][y - 1].getIsOccupied() && !this.board.getTileSet()[x][y].getIsOccupied()));
                 }
             }
         } else if (Math.abs(dx) == 1) {
 
             if (this.colour == Colour.WHITE) {
                 if (dy == -1) {
-                    for (int i = 0; i < Board.PIECES.size(); i++) { 
+                    for (int i = 0; i < Board.PIECES.size(); i++) {
                         if (Board.PIECES.get(i).getX() == x
                                 && Board.PIECES.get(i).getY() == y
                                 && !this.getIsSameColour(Board.PIECES.get(i))) {
@@ -51,7 +53,7 @@ public class Pawn extends Piece {
                 }
             } else {
                 if (dy == 1) {
-                    for (int i = 0; i < Board.PIECES.size(); i++) { 
+                    for (int i = 0; i < Board.PIECES.size(); i++) {
                         if (Board.PIECES.get(i).getX() == x
                                 && Board.PIECES.get(i).getY() == y
                                 && !this.getIsSameColour(Board.PIECES.get(i))) {

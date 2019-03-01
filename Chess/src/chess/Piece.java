@@ -23,13 +23,18 @@ public abstract class Piece implements Drawable {
     protected String sprite;
     protected Board board;
     protected boolean isSelected = false;
+    protected boolean prevHasMoved = false;
     protected boolean hasMoved = false;
+    protected int prevX;
+    protected int prevY;
 
     public Piece(DConsole dc, int initX, int initY, Colour c, Board b, String sprite) {
         this.dc = dc;
         this.x = initX;
+        this.prevX = x;
         this.initX = initX;
         this.y = initY;
+        this.prevY = y;
         this.initY = initY;
         this.colour = c;
         this.board = b;
@@ -37,8 +42,11 @@ public abstract class Piece implements Drawable {
     }
 
     public void move(int x, int y) {
+        this.prevX = x;
+        this.prevY = y;
         this.x = x;
         this.y = y;
+        this.prevHasMoved = hasMoved;
         this.hasMoved = true;
     }
 

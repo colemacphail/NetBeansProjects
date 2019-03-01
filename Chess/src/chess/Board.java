@@ -126,8 +126,8 @@ public class Board implements Drawable {
                             this.selectedPiece().move(i, j);//move it to the selected tile
                             hasPieceMoved = true;//declare that a piece has moved; you should deselect all pieces and end turn
                             for (int k = 0; k < Board.PIECES.size(); k++) {
-                                if (Board.PIECES.get(k).getX() == i 
-                                        && Board.PIECES.get(k).getY() == j 
+                                if (Board.PIECES.get(k).getX() == i
+                                        && Board.PIECES.get(k).getY() == j
                                         && !Board.PIECES.get(k).getIsSameColour(this.selectedPiece())) {
                                     Board.PIECES.remove(k);
                                 }
@@ -201,5 +201,14 @@ public class Board implements Drawable {
 
     public Tile[][] getTileSet() {
         return this.tiles;
+    }
+
+    public Piece getKing(Colour c) {
+        for (Piece i : Board.PIECES) {
+            if (i.getClass().toString().equals("class chess.King") && i.getColour() == c) {
+                return i;
+            }
+        }
+        return null;
     }
 }
