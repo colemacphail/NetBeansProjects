@@ -103,7 +103,6 @@ public class Board implements Drawable {
                     boolean hasPieceMoved = false;
 
                     this.tiles[i][j].setSelected(true);//select the tile clicked
-                    System.out.println("x: " + i + ", y: " + j);
                     boolean clickedPiece = false;
 
                     for (int k = 0; k < Board.PIECES.size(); k++) {

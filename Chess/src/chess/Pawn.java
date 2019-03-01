@@ -41,7 +41,7 @@ public class Pawn extends Piece {
 
             if (this.colour == Colour.WHITE) {
                 if (dy == -1) {
-                    for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
+                    for (int i = 0; i < Board.PIECES.size(); i++) { 
                         if (Board.PIECES.get(i).getX() == x
                                 && Board.PIECES.get(i).getY() == y
                                 && !this.getIsSameColour(Board.PIECES.get(i))) {
@@ -51,7 +51,7 @@ public class Pawn extends Piece {
                 }
             } else {
                 if (dy == 1) {
-                    for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
+                    for (int i = 0; i < Board.PIECES.size(); i++) { 
                         if (Board.PIECES.get(i).getX() == x
                                 && Board.PIECES.get(i).getY() == y
                                 && !this.getIsSameColour(Board.PIECES.get(i))) {
@@ -61,8 +61,6 @@ public class Pawn extends Piece {
                 }
             }
 
-        } else {
-            return false;
         }
         return false;
     }
@@ -80,7 +78,8 @@ public class Pawn extends Piece {
                 }
                 for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
                     if (Board.PIECES.get(i).getX() == j
-                            && Board.PIECES.get(i).getY() == k) {
+                            && Board.PIECES.get(i).getY() == k
+                            && this.getIsSameColour(Board.PIECES.get(i))) {
                         isValid = false;
                     }
                 }

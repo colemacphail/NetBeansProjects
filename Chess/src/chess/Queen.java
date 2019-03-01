@@ -106,11 +106,13 @@ public class Queen extends Piece {
                     int dx = j - this.x;
                     int dy = k - this.y;
                     if (Math.abs(dx) == Math.abs(dy)) {
+                        if (j - 1 > -1 && k - 1 > -1) {
 
-                        boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k - 1].getIsOccupied();
-                        if (isPrevTileOccupied || !canMoveTiles[j - 1][k - 1]) {
-                            if (this.x != j - 1 && this.y != k - 1) {
-                                canMoveTiles[j][k] = false;
+                            boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k - 1].getIsOccupied();
+                            if (isPrevTileOccupied || !canMoveTiles[j - 1][k - 1]) {
+                                if (this.x != j - 1 && this.y != k - 1) {
+                                    canMoveTiles[j][k] = false;
+                                }
                             }
                         }
                     }
@@ -121,11 +123,13 @@ public class Queen extends Piece {
                     int dx = j - this.x;
                     int dy = k - this.y;
                     if (Math.abs(dx) == Math.abs(dy)) {
+                        if (j - 1 > -1 && k + 1 < this.board.getTileSet()[0].length) {
 
-                        boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k + 1].getIsOccupied();
-                        if (isPrevTileOccupied || !canMoveTiles[j - 1][k + 1]) {
-                            if (this.x != j - 1 && this.y != k + 1) {
-                                canMoveTiles[j][k] = false;
+                            boolean isPrevTileOccupied = this.board.getTileSet()[j - 1][k + 1].getIsOccupied();
+                            if (isPrevTileOccupied || !canMoveTiles[j - 1][k + 1]) {
+                                if (this.x != j - 1 && this.y != k + 1) {
+                                    canMoveTiles[j][k] = false;
+                                }
                             }
                         }
                     }
@@ -136,11 +140,13 @@ public class Queen extends Piece {
                     int dx = j - this.x;
                     int dy = k - this.y;
                     if (Math.abs(dx) == Math.abs(dy)) {
+                        if (j + 1 < this.board.getTileSet().length && k - 1 > -1) {
 
-                        boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k - 1].getIsOccupied();
-                        if (isPrevTileOccupied || !canMoveTiles[j + 1][k - 1]) {
-                            if (this.x != j + 1 && this.y != k - 1) {
-                                canMoveTiles[j][k] = false;
+                            boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k - 1].getIsOccupied();
+                            if (isPrevTileOccupied || !canMoveTiles[j + 1][k - 1]) {
+                                if (this.x != j + 1 && this.y != k - 1) {
+                                    canMoveTiles[j][k] = false;
+                                }
                             }
                         }
                     }
@@ -151,17 +157,19 @@ public class Queen extends Piece {
                     int dx = j - this.x;
                     int dy = k - this.y;
                     if (Math.abs(dx) == Math.abs(dy)) {
+                        if (j + 1 < this.board.getTileSet().length && k + 1 < this.board.getTileSet()[0].length) {
 
-                        boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k + 1].getIsOccupied();
-                        if (isPrevTileOccupied || !canMoveTiles[j + 1][k + 1]) {
-                            if (this.x != j + 1 && this.y != k + 1) {
-                                canMoveTiles[j][k] = false;
+                            boolean isPrevTileOccupied = this.board.getTileSet()[j + 1][k + 1].getIsOccupied();
+                            if (isPrevTileOccupied || !canMoveTiles[j + 1][k + 1]) {
+                                if (this.x != j + 1 && this.y != k + 1) {
+                                    canMoveTiles[j][k] = false;
+                                }
                             }
                         }
                     }
                 }
             }
-        } catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("woopsies: " + e);
         }
 
