@@ -20,10 +20,21 @@ public class Board implements Drawable {
     private int mouseX;
     private int mouseY;
 
-    public static final ArrayList<Piece> PIECES = new ArrayList<>();
+    public final ArrayList<Piece> PIECES = new ArrayList<>();
 
     private Colour whoseTurn = Colour.WHITE;
-
+    
+    public Board clone(DConsole dc, ArrayList<Piece> pieces){
+        return new Board(this.dc, pieces);
+    }
+    
+    public Board(DConsole dc, ArrayList<Piece> pieces){
+        this.dc = dc;
+        for (int i = 0; i < pieces.size(); i++){
+            this.PIECES.add(pieces.get(i));
+        }
+    }
+    
     public Board(DConsole dc) {
         this.dc = dc;
 
@@ -37,27 +48,27 @@ public class Board implements Drawable {
             }
         }
         //create all the pieces
-        Board.PIECES.add(new Rook(this.dc, 0, 7, Colour.WHITE, this, "White Rook.png"));
-        Board.PIECES.add(new Knight(this.dc, 1, 7, Colour.WHITE, this, "White Knight.png"));
-        Board.PIECES.add(new Bishop(this.dc, 2, 7, Colour.WHITE, this, "White Bishop.png"));
-        Board.PIECES.add(new Queen(this.dc, 3, 7, Colour.WHITE, this, "White Queen.png"));
-        Board.PIECES.add(new King(this.dc, 4, 7, Colour.WHITE, this, "White King.png"));
-        Board.PIECES.add(new Bishop(this.dc, 5, 7, Colour.WHITE, this, "White Bishop.png"));
-        Board.PIECES.add(new Knight(this.dc, 6, 7, Colour.WHITE, this, "White Knight.png"));
-        Board.PIECES.add(new Rook(this.dc, 7, 7, Colour.WHITE, this, "White Rook.png"));
+        this.PIECES.add(new Rook(this.dc, 0, 7, Colour.WHITE, this, "White Rook.png"));
+        this.PIECES.add(new Knight(this.dc, 1, 7, Colour.WHITE, this, "White Knight.png"));
+        this.PIECES.add(new Bishop(this.dc, 2, 7, Colour.WHITE, this, "White Bishop.png"));
+        this.PIECES.add(new Queen(this.dc, 3, 7, Colour.WHITE, this, "White Queen.png"));
+        this.PIECES.add(new King(this.dc, 4, 7, Colour.WHITE, this, "White King.png"));
+        this.PIECES.add(new Bishop(this.dc, 5, 7, Colour.WHITE, this, "White Bishop.png"));
+        this.PIECES.add(new Knight(this.dc, 6, 7, Colour.WHITE, this, "White Knight.png"));
+        this.PIECES.add(new Rook(this.dc, 7, 7, Colour.WHITE, this, "White Rook.png"));
 
-        Board.PIECES.add(new Rook(this.dc, 0, 0, Colour.BLACK, this, "Black Rook.png"));
-        Board.PIECES.add(new Knight(this.dc, 1, 0, Colour.BLACK, this, "Black Knight.png"));
-        Board.PIECES.add(new Bishop(this.dc, 2, 0, Colour.BLACK, this, "Black Bishop.png"));
-        Board.PIECES.add(new Queen(this.dc, 3, 0, Colour.BLACK, this, "Black Queen.png"));
-        Board.PIECES.add(new King(this.dc, 4, 0, Colour.BLACK, this, "Black King.png"));
-        Board.PIECES.add(new Bishop(this.dc, 5, 0, Colour.BLACK, this, "Black Bishop.png"));
-        Board.PIECES.add(new Knight(this.dc, 6, 0, Colour.BLACK, this, "Black Knight.png"));
-        Board.PIECES.add(new Rook(this.dc, 7, 0, Colour.BLACK, this, "Black Rook.png"));
+        this.PIECES.add(new Rook(this.dc, 0, 0, Colour.BLACK, this, "Black Rook.png"));
+        this.PIECES.add(new Knight(this.dc, 1, 0, Colour.BLACK, this, "Black Knight.png"));
+        this.PIECES.add(new Bishop(this.dc, 2, 0, Colour.BLACK, this, "Black Bishop.png"));
+        this.PIECES.add(new Queen(this.dc, 3, 0, Colour.BLACK, this, "Black Queen.png"));
+        this.PIECES.add(new King(this.dc, 4, 0, Colour.BLACK, this, "Black King.png"));
+        this.PIECES.add(new Bishop(this.dc, 5, 0, Colour.BLACK, this, "Black Bishop.png"));
+        this.PIECES.add(new Knight(this.dc, 6, 0, Colour.BLACK, this, "Black Knight.png"));
+        this.PIECES.add(new Rook(this.dc, 7, 0, Colour.BLACK, this, "Black Rook.png"));
 
         for (int i = 0; i < 8; i++) {
-            Board.PIECES.add(new Pawn(this.dc, i, 6, Colour.WHITE, this, "White Pawn.png"));
-            Board.PIECES.add(new Pawn(this.dc, i, 1, Colour.BLACK, this, "Black Pawn.png"));
+            this.PIECES.add(new Pawn(this.dc, i, 6, Colour.WHITE, this, "White Pawn.png"));
+            this.PIECES.add(new Pawn(this.dc, i, 1, Colour.BLACK, this, "Black Pawn.png"));
         }
     }
 
@@ -72,7 +83,7 @@ public class Board implements Drawable {
         }
 
         for (int i = 0; i < PIECES.size(); i++) {
-            Board.PIECES.get(i).draw();
+            this.PIECES.get(i).draw();
         }
     }
 
@@ -84,8 +95,8 @@ public class Board implements Drawable {
             for (int j = 0; j < this.tiles[0].length; j++) {
                 boolean isOccupied = false;
                 for (int k = 0; k < PIECES.size(); k++) {
-                    if (Board.PIECES.get(k).getX() == i
-                            && Board.PIECES.get(k).getY() == j) {
+                    if (this.PIECES.get(k).getX() == i
+                            && this.PIECES.get(k).getY() == j) {
                         isOccupied = true;
                     }
                 }
@@ -105,13 +116,13 @@ public class Board implements Drawable {
                     this.tiles[i][j].setSelected(true);//select the tile clicked
                     boolean clickedPiece = false;
 
-                    for (int k = 0; k < Board.PIECES.size(); k++) {
-                        if (Board.PIECES.get(k).getX() == i
-                                && Board.PIECES.get(k).getY() == j) {//if you click on a piece 
+                    for (int k = 0; k < this.PIECES.size(); k++) {
+                        if (this.PIECES.get(k).getX() == i
+                                && this.PIECES.get(k).getY() == j) {//if you click on a piece 
 
-                            if (Board.PIECES.get(k).getColour() == whoseTurn) {//if it's yours
+                            if (this.PIECES.get(k).getColour() == whoseTurn) {//if it's yours
                                 this.deselectAllPieces();//deselect all pieces 
-                                Board.PIECES.get(k).setSelected(true);//select the clicked piece
+                                this.PIECES.get(k).setSelected(true);//select the clicked piece
                                 clickedPiece = true;
                             }
                         }
@@ -121,15 +132,16 @@ public class Board implements Drawable {
                             && !clickedPiece) {//once per cycle
                         if ((i != this.selectedPiece().getX()
                                 || j != this.selectedPiece().getY())
-                                && this.selectedPiece().getPossibleMoves()[i][j]) {//if you're not moving it to the same tile
+                                && this.selectedPiece().getPossibleMoves()[i][j]
+                                && this.selectedPiece().getWouldBeInCheck(i, j)) {//if you're not moving it to the same tile
 
                             this.selectedPiece().move(i, j);//move it to the selected tile
                             hasPieceMoved = true;//declare that a piece has moved; you should deselect all pieces and end turn
-                            for (int k = 0; k < Board.PIECES.size(); k++) {
-                                if (Board.PIECES.get(k).getX() == i
-                                        && Board.PIECES.get(k).getY() == j
-                                        && !Board.PIECES.get(k).getIsSameColour(this.selectedPiece())) {
-                                    Board.PIECES.remove(k);
+                            for (int k = 0; k < this.PIECES.size(); k++) {
+                                if (this.PIECES.get(k).getX() == i
+                                        && this.PIECES.get(k).getY() == j
+                                        && !this.PIECES.get(k).getIsSameColour(this.selectedPiece())) {
+                                    this.PIECES.remove(k);
                                 }
                             }
                         } else {
@@ -170,15 +182,15 @@ public class Board implements Drawable {
     }
 
     private void deselectAllPieces() {
-        for (int k = 0; k < Board.PIECES.size(); k++) {
-            Board.PIECES.get(k).setSelected(false);
+        for (int k = 0; k < this.PIECES.size(); k++) {
+            this.PIECES.get(k).setSelected(false);
         }
     }
 
     private boolean isPieceSelected() {
         boolean isSelected = false;
-        for (int k = 0; k < Board.PIECES.size(); k++) {
-            if (Board.PIECES.get(k).getIsSelected()) {
+        for (int k = 0; k < this.PIECES.size(); k++) {
+            if (this.PIECES.get(k).getIsSelected()) {
                 isSelected = true;
             }
         }
@@ -187,16 +199,16 @@ public class Board implements Drawable {
 
     private Piece selectedPiece() {
         Piece p = null;
-        for (int k = 0; k < Board.PIECES.size(); k++) {
-            if (Board.PIECES.get(k).getIsSelected()) {
-                p = Board.PIECES.get(k);
+        for (int k = 0; k < this.PIECES.size(); k++) {
+            if (this.PIECES.get(k).getIsSelected()) {
+                p = this.PIECES.get(k);
             }
         }
         return p;
     }
 
     public ArrayList<Piece> getPieceList() {
-        return Board.PIECES;
+        return this.PIECES;
     }
 
     public Tile[][] getTileSet() {
@@ -204,7 +216,7 @@ public class Board implements Drawable {
     }
 
     public Piece getKing(Colour c) {
-        for (Piece i : Board.PIECES) {
+        for (Piece i : this.PIECES) {
             if (i.getClass().toString().equals("class chess.King") && i.getColour() == c) {
                 return i;
             }

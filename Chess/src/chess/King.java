@@ -39,10 +39,10 @@ public class King extends Piece {
                 if (!this.canMove(j, k)) { // if the piece cannot move to a tile, it is not valid
                     isValid = false;
                 }
-                for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
-                    if (Board.PIECES.get(i).getX() == j
-                            && Board.PIECES.get(i).getY() == k
-                            && getIsSameColour(Board.PIECES.get(i))) {
+                for (int i = 0; i < this.board.getPieceList().size(); i++) { // if a tile is occupied, it is not valid
+                    if (this.board.getPieceList().get(i).getX() == j
+                            && this.board.getPieceList().get(i).getY() == k
+                            && getIsSameColour(this.board.getPieceList().get(i))) {
                         isValid = false;
                     }
                 }

@@ -83,6 +83,27 @@ public abstract class Piece implements Drawable {
         return p.getColour() == this.colour;
     }
 
+    public boolean getWouldBeInCheck(int x, int y) {
+        Board temp = new Board(this.dc, this.board.getPieceList());
+        int index = -1;
+
+        for (int i = 0; i < temp.getPieceList().size(); i++) {
+            if (temp.getPieceList().get(i) == this) {
+                index = i;
+            }
+        }
+
+        temp.getPieceList().get(index).move(x, y);
+
+        for (int i = 0; i < temp.getPieceList().size(); i++) {
+            if (temp.getPieceList().get(i).getPossibleMoves()[temp.getKing(this.colour).getX()][temp.getKing(this.colour).getY()]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public abstract boolean[][] getPossibleMoves();
 
     public abstract boolean canMove(int x, int y);

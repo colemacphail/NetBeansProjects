@@ -43,20 +43,20 @@ public class Pawn extends Piece {
 
             if (this.colour == Colour.WHITE) {
                 if (dy == -1) {
-                    for (int i = 0; i < Board.PIECES.size(); i++) {
-                        if (Board.PIECES.get(i).getX() == x
-                                && Board.PIECES.get(i).getY() == y
-                                && !this.getIsSameColour(Board.PIECES.get(i))) {
+                    for (int i = 0; i < this.board.getPieceList().size(); i++) {
+                        if (this.board.getPieceList().get(i).getX() == x
+                                && this.board.getPieceList().get(i).getY() == y
+                                && !this.getIsSameColour(this.board.getPieceList().get(i))) {
                             return true;
                         }
                     }
                 }
             } else {
                 if (dy == 1) {
-                    for (int i = 0; i < Board.PIECES.size(); i++) {
-                        if (Board.PIECES.get(i).getX() == x
-                                && Board.PIECES.get(i).getY() == y
-                                && !this.getIsSameColour(Board.PIECES.get(i))) {
+                    for (int i = 0; i < this.board.getPieceList().size(); i++) {
+                        if (this.board.getPieceList().get(i).getX() == x
+                                && this.board.getPieceList().get(i).getY() == y
+                                && !this.getIsSameColour(this.board.getPieceList().get(i))) {
                             return true;
                         }
                     }
@@ -78,10 +78,10 @@ public class Pawn extends Piece {
                 if (!this.canMove(j, k)) { // if the piece cannot move to a tile, it is not valid
                     isValid = false;
                 }
-                for (int i = 0; i < Board.PIECES.size(); i++) { // if a tile is occupied, it is not valid
-                    if (Board.PIECES.get(i).getX() == j
-                            && Board.PIECES.get(i).getY() == k
-                            && this.getIsSameColour(Board.PIECES.get(i))) {
+                for (int i = 0; i < this.board.getPieceList().size(); i++) { // if a tile is occupied, it is not valid
+                    if (this.board.getPieceList().get(i).getX() == j
+                            && this.board.getPieceList().get(i).getY() == k
+                            && this.getIsSameColour(this.board.getPieceList().get(i))) {
                         isValid = false;
                     }
                 }
