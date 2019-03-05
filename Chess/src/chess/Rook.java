@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class Rook extends Piece {
 
-    public Rook(DConsole dc, int initX, int initY, Colour c, Board b, String s) {
-        super(dc, initX, initY, c, b, s);
+    public Rook(DConsole dc, int initX, int initY, Colour c, Board b, String s, int id) {
+        super(dc, initX, initY, c, b, s, id);
     }
 
     @Override
@@ -179,5 +179,10 @@ public class Rook extends Piece {
         }
 
         return canMoveTiles;
+    }
+    
+    @Override
+    public Piece clone() {
+        return new Rook(this.dc, this.x, this.y, this.colour, this.board, this.sprite, this.id);
     }
 }

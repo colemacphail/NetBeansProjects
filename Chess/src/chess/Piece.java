@@ -27,8 +27,11 @@ public abstract class Piece implements Drawable {
     protected boolean hasMoved = false;
     protected int prevX;
     protected int prevY;
+    protected int id;
 
-    public Piece(DConsole dc, int initX, int initY, Colour c, Board b, String sprite) {
+    public abstract Piece clone();
+
+    public Piece(DConsole dc, int initX, int initY, Colour c, Board b, String sprite, int id) {
         this.dc = dc;
         this.x = initX;
         this.prevX = x;
@@ -39,6 +42,7 @@ public abstract class Piece implements Drawable {
         this.colour = c;
         this.board = b;
         this.sprite = sprite;
+        this.id = id;
     }
 
     public void move(int x, int y) {
@@ -88,7 +92,7 @@ public abstract class Piece implements Drawable {
         int index = -1;
 
         for (int i = 0; i < temp.getPieceList().size(); i++) {
-            if (temp.getPieceList().get(i) == this) {
+            if (temp.getPieceList().get(i).id == this.id) {
                 index = i;
             }
         }

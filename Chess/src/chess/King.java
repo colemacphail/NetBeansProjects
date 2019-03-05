@@ -13,9 +13,9 @@ import java.util.ArrayList;
  * @author Cole
  */
 public class King extends Piece {
-
-    public King(DConsole dc, int x, int y, Colour c, Board b, String s) {
-        super(dc, x, y, c, b, s);
+    
+    public King(DConsole dc, int x, int y, Colour c, Board b, String s, int id) {
+        super(dc, x, y, c, b, s, id);
     }
 
     @Override
@@ -51,5 +51,10 @@ public class King extends Piece {
             }
         }
         return canMoveTiles;
+    }
+
+    @Override
+    public Piece clone() {
+        return new King(this.dc, this.x, this.y, this.colour, this.board, this.sprite, this.id);
     }
 }

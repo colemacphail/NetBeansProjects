@@ -23,18 +23,20 @@ public class Board implements Drawable {
     public final ArrayList<Piece> PIECES = new ArrayList<>();
 
     private Colour whoseTurn = Colour.WHITE;
-    
-    public Board clone(DConsole dc, ArrayList<Piece> pieces){
+
+    public Board clone(DConsole dc, ArrayList<Piece> pieces) {
         return new Board(this.dc, pieces);
     }
-    
-    public Board(DConsole dc, ArrayList<Piece> pieces){
+
+    public Board(DConsole dc, ArrayList<Piece> pieces) {
         this.dc = dc;
-        for (int i = 0; i < pieces.size(); i++){
-            this.PIECES.add(pieces.get(i));
+        for (int i = 0; i < pieces.size(); i++) {
+            Piece temp = pieces.get(i);
+            this.PIECES.add(temp.clone());
+        
         }
     }
-    
+
     public Board(DConsole dc) {
         this.dc = dc;
 
@@ -48,27 +50,27 @@ public class Board implements Drawable {
             }
         }
         //create all the pieces
-        this.PIECES.add(new Rook(this.dc, 0, 7, Colour.WHITE, this, "White Rook.png"));
-        this.PIECES.add(new Knight(this.dc, 1, 7, Colour.WHITE, this, "White Knight.png"));
-        this.PIECES.add(new Bishop(this.dc, 2, 7, Colour.WHITE, this, "White Bishop.png"));
-        this.PIECES.add(new Queen(this.dc, 3, 7, Colour.WHITE, this, "White Queen.png"));
-        this.PIECES.add(new King(this.dc, 4, 7, Colour.WHITE, this, "White King.png"));
-        this.PIECES.add(new Bishop(this.dc, 5, 7, Colour.WHITE, this, "White Bishop.png"));
-        this.PIECES.add(new Knight(this.dc, 6, 7, Colour.WHITE, this, "White Knight.png"));
-        this.PIECES.add(new Rook(this.dc, 7, 7, Colour.WHITE, this, "White Rook.png"));
+        this.PIECES.add(new Rook(this.dc, 0, 7, Colour.WHITE, this, "White Rook.png", 0));
+        this.PIECES.add(new Knight(this.dc, 1, 7, Colour.WHITE, this, "White Knight.png", 1));
+        this.PIECES.add(new Bishop(this.dc, 2, 7, Colour.WHITE, this, "White Bishop.png", 2));
+        this.PIECES.add(new Queen(this.dc, 3, 7, Colour.WHITE, this, "White Queen.png", 3));
+        this.PIECES.add(new King(this.dc, 4, 7, Colour.WHITE, this, "White King.png", 4));
+        this.PIECES.add(new Bishop(this.dc, 5, 7, Colour.WHITE, this, "White Bishop.png", 5));
+        this.PIECES.add(new Knight(this.dc, 6, 7, Colour.WHITE, this, "White Knight.png", 6));
+        this.PIECES.add(new Rook(this.dc, 7, 7, Colour.WHITE, this, "White Rook.png", 7));
 
-        this.PIECES.add(new Rook(this.dc, 0, 0, Colour.BLACK, this, "Black Rook.png"));
-        this.PIECES.add(new Knight(this.dc, 1, 0, Colour.BLACK, this, "Black Knight.png"));
-        this.PIECES.add(new Bishop(this.dc, 2, 0, Colour.BLACK, this, "Black Bishop.png"));
-        this.PIECES.add(new Queen(this.dc, 3, 0, Colour.BLACK, this, "Black Queen.png"));
-        this.PIECES.add(new King(this.dc, 4, 0, Colour.BLACK, this, "Black King.png"));
-        this.PIECES.add(new Bishop(this.dc, 5, 0, Colour.BLACK, this, "Black Bishop.png"));
-        this.PIECES.add(new Knight(this.dc, 6, 0, Colour.BLACK, this, "Black Knight.png"));
-        this.PIECES.add(new Rook(this.dc, 7, 0, Colour.BLACK, this, "Black Rook.png"));
+        this.PIECES.add(new Rook(this.dc, 0, 0, Colour.BLACK, this, "Black Rook.png", 8));
+        this.PIECES.add(new Knight(this.dc, 1, 0, Colour.BLACK, this, "Black Knight.png", 9));
+        this.PIECES.add(new Bishop(this.dc, 2, 0, Colour.BLACK, this, "Black Bishop.png", 10));
+        this.PIECES.add(new Queen(this.dc, 3, 0, Colour.BLACK, this, "Black Queen.png", 11));
+        this.PIECES.add(new King(this.dc, 4, 0, Colour.BLACK, this, "Black King.png", 12));
+        this.PIECES.add(new Bishop(this.dc, 5, 0, Colour.BLACK, this, "Black Bishop.png", 13));
+        this.PIECES.add(new Knight(this.dc, 6, 0, Colour.BLACK, this, "Black Knight.png", 14));
+        this.PIECES.add(new Rook(this.dc, 7, 0, Colour.BLACK, this, "Black Rook.png", 15));
 
         for (int i = 0; i < 8; i++) {
-            this.PIECES.add(new Pawn(this.dc, i, 6, Colour.WHITE, this, "White Pawn.png"));
-            this.PIECES.add(new Pawn(this.dc, i, 1, Colour.BLACK, this, "Black Pawn.png"));
+            this.PIECES.add(new Pawn(this.dc, i, 6, Colour.WHITE, this, "White Pawn.png", i + 16));
+            this.PIECES.add(new Pawn(this.dc, i, 1, Colour.BLACK, this, "Black Pawn.png", i + 24));
         }
     }
 
@@ -133,7 +135,7 @@ public class Board implements Drawable {
                         if ((i != this.selectedPiece().getX()
                                 || j != this.selectedPiece().getY())
                                 && this.selectedPiece().getPossibleMoves()[i][j]
-                                && this.selectedPiece().getWouldBeInCheck(i, j)) {//if you're not moving it to the same tile
+                                && !this.selectedPiece().getWouldBeInCheck(i, j)) {//if you're not moving it to the same tile
 
                             this.selectedPiece().move(i, j);//move it to the selected tile
                             hasPieceMoved = true;//declare that a piece has moved; you should deselect all pieces and end turn

@@ -1,5 +1,7 @@
 4
-3
-174
+5
+8
 bullets
+damage
 health
+bullets
