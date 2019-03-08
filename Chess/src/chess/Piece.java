@@ -46,12 +46,18 @@ public abstract class Piece implements Drawable {
     }
 
     public void move(int x, int y) {
-        this.prevX = x;
-        this.prevY = y;
+        this.prevX = this.x;
+        this.prevY = this.y;
         this.x = x;
         this.y = y;
         this.prevHasMoved = hasMoved;
         this.hasMoved = true;
+    }
+    
+    public void unmove(){
+        this.x = prevX;
+        this.y = prevY;
+        this.hasMoved = prevHasMoved;
     }
 
     @Override

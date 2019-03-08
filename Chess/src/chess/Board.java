@@ -33,7 +33,7 @@ public class Board implements Drawable {
         for (int i = 0; i < pieces.size(); i++) {
             Piece temp = pieces.get(i);
             this.PIECES.add(temp.clone());
-        
+
         }
     }
 
@@ -134,14 +134,23 @@ public class Board implements Drawable {
                             && !clickedPiece) {//once per cycle
                         if ((i != this.selectedPiece().getX()
                                 || j != this.selectedPiece().getY())
-                                && this.selectedPiece().getPossibleMoves()[i][j]
-                                && !this.selectedPiece().getWouldBeInCheck(i, j)) {//if you're not moving it to the same tile
+                                && this.selectedPiece().getPossibleMoves()[i][j]) {//if you're not moving it to the same tile
 
                             this.selectedPiece().move(i, j);//move it to the selected tile
-                            hasPieceMoved = true;//declare that a piece has moved; you should deselect all pieces and end turn
+                            boolean isInCheck = false;
                             for (int k = 0; k < this.PIECES.size(); k++) {
-                                if (this.PIECES.get(k).getX() == i
-                                        && this.PIECES.get(k).getY() == j
+                                if (this.PIECES.get(k).getPossibleMoves()[this.getKing(this.selectedPiece().colour).getX()][this.getKing(this.selectedPiece().colour).getY()]) {
+                                    if (!this.PIECES.get(k).getIsSameColour(this.selectedPiece())) {
+                                        isInCheck = true;
+                                        this.selectedPiece().unmove();
+                                        this.deselectAllTiles();
+                                    }
+                                }
+                            }
+                            hasPieceMoved = !isInCheck;//declare that a piece has moved; you should deselect all pieces and end turn
+                            for (int k = 0; k < this.PIECES.size(); k++) {//take a piece if needed
+                                if (this.PIECES.get(k).getX() == this.selectedPiece().getX()
+                                        && this.PIECES.get(k).getY() == this.selectedPiece().getY()
                                         && !this.PIECES.get(k).getIsSameColour(this.selectedPiece())) {
                                     this.PIECES.remove(k);
                                 }
